@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>leaflet.mapCorrection</title>
+    <meta charset="utf-8" />
+    <!-- 引入leafletapi -->
+    <link rel="stylesheet" href="./lib/leaflet.css" />
+    <script src="./lib/leaflet.js"></script>
+    <!-- 引入互联网地图插件 -->
+    <script src="./lib/plugins/leaflet.ChineseTmsProviders.js"></script>
+    <!-- 引入地图纠偏插件 -->
+    <script src="../src/leaflet.mapCorrection.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .map {
+            position: absolute;
+            height: 100%;
+            right: 0;
+            left: 0;
+        }
+
+        .menuBar {
+            position: relative;
+            text-align: center;
+            top: 10px;
+            margin: 0 50px;
+            padding: 5px;
+            border-radius: 3px;
+            z-index: 999;
+            color: #ffffff;
+            background-color: rgba(0, 168, 0, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+    <div class="menuBar">
+        互联网地图纠偏
+    </div>
+    <script>
+        var map = L.map('map', {
+            center: [39.905530, 116.391305],
+            zoom: 15,
+        });
+        
+        //添加高德地图
+        L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
+
+        //设置参照物
+        var marker = L.marker([39.905530,116.391305]).addTo(map);
+        marker.bindPopup('<p>我是天安门广场国旗所在位置</p>');
+
+    </script>
+</body>
+
+</html>
