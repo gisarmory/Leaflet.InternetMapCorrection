@@ -10,12 +10,12 @@ L.CoordConver = function () {
             case "Geoq":
             case "GaoDe":
             case "Google":
-            case "OSM":
                 zbName = "gcj02";
                 break;
             case "Baidu":
                 zbName = "bd09";
                 break;
+            case "OSM":
             case "TianDiTu":
                 zbName = "wgs84";
                 break;
@@ -25,14 +25,14 @@ L.CoordConver = function () {
 
     /**百度转84*/
     this.bd09_To_gps84 = function(lng, lat) {
-        var gcj02 = bd09_To_gcj02(lng, lat);
-        var map84 = gcj02_To_gps84(gcj02.lng, gcj02.lat);
+        var gcj02 = this.bd09_To_gcj02(lng, lat);
+        var map84 = this.gcj02_To_gps84(gcj02.lng, gcj02.lat);
         return map84;
     }
     /**84转百度*/
     this.gps84_To_bd09 = function (lng, lat) {
-        var gcj02 = gps84_To_gcj02(lng, lat);
-        var bd09 = gcj02_To_bd09(gcj02.lng, gcj02.lat);
+        var gcj02 = this.gps84_To_gcj02(lng, lat);
+        var bd09 = this.gcj02_To_bd09(gcj02.lng, gcj02.lat);
         return bd09;
     }
     /**84转火星*/
@@ -153,50 +153,12 @@ L.tileLayer.chinaProvider = function (type, options) {
     return new L.TileLayer.ChinaProvider(type, options);
 };
 
-L.Map.include({
-    _latLngToNewLayerPoint: function (latlng, zoom, center) {
-        if (this.options.corrdType) {
-            var newCoord = latlng;
-            if (this.options.corrdType == "gcj02") {
-                newCoord = L.coordConver().gps84_To_gcj02(latlng.lng, latlng.lat);
-                // newCoord = L.coordConver().gcj02_To_gps84(latlng.lng, latlng.lat);
-            } else if (this.options.corrdType == "bd09") {
-                newCoord = L.coordConver().gps84_To_bd09(latlng.lng, latlng.lat);
-            }
-            var newlatlng = new L.LatLng(newCoord.lat, newCoord.lng);
-            var topLeft = this._getNewPixelOrigin(center, zoom);
-            return this.project(newlatlng, zoom)._subtract(topLeft);
-        } else {
-            var topLeft = this._getNewPixelOrigin(center, zoom);
-            return this.project(latlng, zoom)._subtract(topLeft);
-        }
-    },
-    latLngToLayerPoint: function (latlng) {
-        if (this.options.corrdType) {
-            var newCoord = latlng;
-            if (this.options.corrdType == "gcj02") {
-                newCoord = L.coordConver().gps84_To_gcj02(latlng.lng, latlng.lat);
-                // newCoord = L.coordConver().gcj02_To_gps84(latlng.lng, latlng.lat);
-            } else if (this.options.corrdType == "bd09") {
-                newCoord = L.coordConver().gps84_To_bd09(latlng.lng, latlng.lat);
-            }
-            var newlatlng = new L.LatLng(newCoord.lat, newCoord.lng);
-            var projectedPoint = this.project(L.latLng(newlatlng))._round();
-            return projectedPoint._subtract(this.getPixelOrigin());
-        } else {
-            var projectedPoint = this.project(L.latLng(latlng))._round();
-            return projectedPoint._subtract(this.getPixelOrigin());
-        }
-    }
-})
-
 L.GridLayer.include({
     _setZoomTransform: function (level, _center, zoom) {
         var center = _center;
         if (center != undefined && this.options) {
             if (this.options.corrdType == 'gcj02') {
                 center = L.coordConver().gps84_To_gcj02(_center.lng, _center.lat);
-                // center = L.coordConver().gcj02_To_gps84(_center.lng, _center.lat);
             } else if (this.options.corrdType == 'bd09') {
                 center = L.coordConver().gps84_To_bd09(_center.lng, _center.lat);
             }
@@ -216,7 +178,6 @@ L.GridLayer.include({
         if (center != undefined && this.options) {
             if (this.options.corrdType == 'gcj02') {
                 center = L.coordConver().gps84_To_gcj02(_center.lng, _center.lat);
-                // center = L.coordConver().gcj02_To_gps84(_center.lng, _center.lat);
             } else if (this.options.corrdType == 'bd09') {
                 center = L.coordConver().gps84_To_bd09(_center.lng, _center.lat);
             }

@@ -7,6 +7,11 @@
     <!-- 引入leafletapi -->
     <link rel="stylesheet" href="./lib/leaflet.css" />
     <script src="./lib/leaflet.js"></script>
+
+    <!--引入proj，百度地图用-->
+    <script src="https://cdn.bootcss.com/proj4js/2.4.3/proj4.js"></script>
+    <script src="https://cdn.bootcss.com/proj4leaflet/1.0.1/proj4leaflet.min.js"></script>
+    
     <!-- 引入互联网地图插件 -->
     <script src="./lib/plugins/leaflet.ChineseTmsProviders.js"></script>
     <!-- 引入地图纠偏插件 -->
@@ -38,22 +43,83 @@
 </head>
 
 <body>
+    <div class="map" id="bdmap"></div>
     <div class="map" id="map"></div>
     <div class="menuBar">
-        互联网地图纠偏
+        互联网地图纠偏:
+		<input type="button" value="百度地图" onclick="showBaiduMap()" />
+		<input type="button" value="高德地图" onclick="showGaodeMap()" />
+		<input type="button" value="天地图" onclick="showTiandituMap()" />
+		<input type="button" value="谷歌地图" onclick="showGoogleMap()" />
+		<input type="button" value="Geoq地图" onclick="showGeoqMap()" />
+		<input type="button" value="OpenStreeMap地图" onclick="showOsmMap()" />
     </div>
     <script>
         var map = L.map('map', {
             center: [39.905530, 116.391305],
-            zoom: 15,
+            zoom: 17,
+            layers:[]
+        });
+        var bdmap = L.map('bdmap', {
+            center: [39.905530, 116.391305],
+            zoom: 17,
+            crs: L.CRS.Baidu,
+            layers:[]
         });
         
         //添加高德地图
-        L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
+        var baiduMap = L.tileLayer.chinaProvider('Baidu.Normal.Map').addTo(bdmap);
+        var gaodeMap = L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
+        var tdtMap = L.tileLayer.chinaProvider('TianDiTu.Normal.Map').addTo(map);
+        var googleMap = L.tileLayer.chinaProvider('Google.Normal.Map').addTo(map);
+        var geoqMap = L.tileLayer.chinaProvider('Geoq.Normal.Map').addTo(map);
+        var osmMap = L.tileLayer.chinaProvider('OSM.Normal.Map').addTo(map);
+
+        function showBaiduMap(){
+            clear()
+            baiduMap.setOpacity(1)
+        }
+
+        function showGaodeMap(){
+            clear()
+            gaodeMap.setOpacity(1)
+        }
+        
+        function showTiandituMap(){
+            clear()
+            tdtMap.setOpacity(1)
+        }
+        
+        function showGoogleMap(){
+            clear()
+            googleMap.setOpacity(1)
+        }
+        
+        function showGeoqMap(){
+            clear()
+            geoqMap.setOpacity(1)
+        }
+        
+        function showOsmMap(){
+            clear()
+            osmMap.setOpacity(1)
+        }
+
+        function clear(){
+            baiduMap.setOpacity(0)
+            gaodeMap.setOpacity(0)
+            tdtMap.setOpacity(0)
+            googleMap.setOpacity(0)
+            geoqMap.setOpacity(0)
+            osmMap.setOpacity(0)
+        }
 
         //设置参照物
         var marker = L.marker([39.905530,116.391305]).addTo(map);
         marker.bindPopup('<p>我是天安门广场国旗所在位置</p>');
+        var marker = L.marker([39.905530,116.391305]).addTo(bdmap);
+        marker.bindPopup('<p>我是天安门广场国旗所在位置</p>');
+        
 
     </script>
 </body>
