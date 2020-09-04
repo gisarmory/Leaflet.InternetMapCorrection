@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
+    </style>
+
+    <!-- 引入leafletapi -->
+    <link rel="stylesheet" href="./lib/leaflet.css" />
+    <script src="./lib/leaflet.js"></script>
+    
+    <!-- 引入互联网地图插件 -->
+    <script src="./lib/plugins/leaflet.ChineseTmsProviders.js"></script>
+
+    <!-- 
+        互联网地图纠偏插件
+        需配合 leaflet.ChineseTmsProviders.js 插件使用
+        无需js代码，引用后自动纠偏
+        纠偏后的坐标为WGS84
+    -->
+    <script type="text/javascript" src='../src/leaflet.mapCorrection.js'></script>
+
+</head>
+
+<body>
+    <div id='map'></div>
+</body>
+
+<script type="text/javascript">
+
+    var map = L.map('map', {
+            center: [39.905530, 116.391305],
+            zoom: 17
+        });
+
+    //添加底图
+    L.tileLayer.chinaProvider('OSM.Normal.Map').addTo(map);
+
+    //设置参照物
+    L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
+
+</script>
+
+</html>
