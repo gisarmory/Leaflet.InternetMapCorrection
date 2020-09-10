@@ -3,6 +3,8 @@ Leaflet 国内互联网地图纠偏插件。
 
 leaflet有一个加载互联网地图的插件[Leaflet.ChineseTmsProviders](https://github.com/htoooth/Leaflet.ChineseTmsProviders)，可以轻松实现加载高德、百度、天地图、谷歌等在线地图瓦片。但并没有去解决它们的偏移问题。网上流传着一份wgs84坐标、国测局坐标（又名火星坐标）和百度坐标之间相互转换的公开算法。Leaflet.InternetMapCorrection 插件集成了这个算法，对Leaflet.ChineseTmsProviders加载的地图瓦片进行了纠偏处理。最终实现了对地图的自动纠偏。
 
+## 用法：
+
 在html文件中，先引入leaflet.js api和 leaflet.ChineseTmsProviders.js插件，再引入Leaflet.InternetMapCorrection.js插件。然后按Leaflet.ChineseTmsProviders的[使用方法](https://github.com/htoooth/Leaflet.ChineseTmsProviders)去正常加载地图，Leaflet.InternetMapCorrection无需编写js代码，就可以实现对地图的自动纠偏。
 
 ## 示例：
