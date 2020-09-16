@@ -47,6 +47,7 @@
 
     //添加底图
     L.tileLayer.chinaProvider('TianDiTu.Normal.Map',{key:'fb258b4c0bbf60ff7a0205b519ad9a96'}).addTo(map);
+    L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion',{key:'fb258b4c0bbf60ff7a0205b519ad9a96'}).addTo(map);
 
     //设置参照物
     L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
