@@ -1,28 +1,6 @@
 //坐标转换
 L.CoordConver = function () {
 
-    //获取坐标类型
-    this.getCorrdType = function(type) {
-        var parts = type.split('.');
-        var providerName = parts[0];
-        var zbName = "wgs84"
-        switch (providerName) {
-            case "Geoq":
-            case "GaoDe":
-            case "Google":
-                zbName = "gcj02";
-                break;
-            case "Baidu":
-                zbName = "bd09";
-                break;
-            case "OSM":
-            case "TianDiTu":
-                zbName = "wgs84";
-                break;
-        }
-        return zbName;
-    }
-
     /**百度转84*/
     this.bd09_To_gps84 = function(lng, lat) {
         var gcj02 = this.bd09_To_gcj02(lng, lat);
@@ -136,21 +114,32 @@ L.coordConver = function () {
     return new L.CoordConver()
 }
 
-
-L.TileLayer.ChinaProvider.include({
-    addTo: function (map) {
-        if (!map.options.corrdType) {
-            map.options.corrdType = this.options.corrdType
-        }
-        map.addLayer(this);
-        return this;
-    }
-})
-
 L.tileLayer.chinaProvider = function (type, options) {
     options = options || {}
-    options.corrdType = L.coordConver().getCorrdType(type);
+    options.corrdType = getCorrdType(type);
     return new L.TileLayer.ChinaProvider(type, options);
+
+    //获取坐标类型
+    function getCorrdType(type) {
+        var parts = type.split('.');
+        var providerName = parts[0];
+        var zbName = "wgs84"
+        switch (providerName) {
+            case "Geoq":
+            case "GaoDe":
+            case "Google":
+                zbName = "gcj02";
+                break;
+            case "Baidu":
+                zbName = "bd09";
+                break;
+            case "OSM":
+            case "TianDiTu":
+                zbName = "wgs84";
+                break;
+        }
+        return zbName;
+    }
 };
 
 L.GridLayer.include({
