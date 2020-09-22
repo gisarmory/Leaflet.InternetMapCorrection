@@ -55,6 +55,10 @@ leaflet有一个加载互联网地图的插件[Leaflet.ChineseTmsProviders](http
 
 [Geoq](http://gisarmory.xyz/Leaflet.InternetMapCorrection/examples/indexGeoq.html)
 
+## 君子协议
+只要star本库，并关注公众号“GIS兵器库”，你就可以免费使用此插件。
+公众号二维码：
+
 ## 相关链接
 
 [Leaflet](https://leafletjs.com/index.html)
