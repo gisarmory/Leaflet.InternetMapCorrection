@@ -3,7 +3,9 @@ Leaflet 国内互联网地图纠偏插件。
 
 ## 简介：
 
-leaflet有一个加载互联网地图的插件[Leaflet.ChineseTmsProviders](https://github.com/htoooth/Leaflet.ChineseTmsProviders)，可以轻松实现加载高德、百度、天地图、谷歌等在线地图瓦片，但并没有去解决它们的偏移问题。网上流传着一份wgs84坐标、国测局坐标（又名火星坐标）和百度坐标之间相互转换的公开算法。通常我们会把这个算法封装成一个接口，在向地图加载数据时，通过接口进行坐标转换，再将转换后的数据添加到地图上。这种方式虽然能解决地图偏移的问题，但很繁琐，每次都要去手动转换，不够优雅。
+leaflet有一个加载互联网地图的插件[Leaflet.ChineseTmsProviders](https://github.com/htoooth/Leaflet.ChineseTmsProviders)，可以轻松实现加载高德、百度、天地图、谷歌等在线地图瓦片，但并没有去解决它们的偏移问题。
+
+网上流传着一份wgs84坐标、国测局坐标（又名火星坐标）和百度坐标之间相互转换的公开算法。通常我们会把这个算法封装成一个接口，在向地图加载数据时，通过接口进行坐标转换，再将转换后的数据添加到地图上。这种方式虽然能解决地图偏移的问题，但很繁琐，每次都要去手动转换，不够优雅。
 
 于是我们决定写一个插件，让它去自动完成坐标转换，不用每次都写代码手动转换坐标的那种。原理就是对地图瓦片进行纠偏，在leaflet加载地图瓦片时，通过转换算法，重新计算每一张地图瓦片的位置。转换后的坐标为wgs84坐标。
 
@@ -56,8 +58,9 @@ leaflet有一个加载互联网地图的插件[Leaflet.ChineseTmsProviders](http
 [Geoq](http://gisarmory.xyz/Leaflet.InternetMapCorrection/examples/indexGeoq.html)
 
 ## 君子协议
-只要star本库，并关注公众号“GIS兵器库”，你就可以免费使用此插件。
-公众号二维码：
+只要star本库，并关注公众号“GIS兵器库”，你就可以免费使用此插件。公众号二维码：
+
+![image-20200923063746592](http://blogimage.gisarmory.xyz/20200923063756.png)
 
 ## 相关链接
 
