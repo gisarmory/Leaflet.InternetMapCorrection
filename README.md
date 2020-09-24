@@ -60,7 +60,7 @@ leaflet有一个加载互联网地图的插件[Leaflet.ChineseTmsProviders](http
 ## 君子协议
 只要star本库，并关注公众号“GIS兵器库”，你就可以免费使用此插件。公众号二维码：
 
-![image-20200923063746592](img/20200923063756.png)
+![[公众号](http://blogimage.gisarmory.xyz/20200923063756.png)](http://blogimage.gisarmory.xyz/20200923063756.png)
 
 ## 相关链接
 
